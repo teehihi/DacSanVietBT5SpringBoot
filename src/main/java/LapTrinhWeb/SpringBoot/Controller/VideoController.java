@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 
 import LapTrinhWeb.SpringBoot.Entity.Category;
 import LapTrinhWeb.SpringBoot.Entity.Video;
 import LapTrinhWeb.SpringBoot.Model.VideoModel;
 import LapTrinhWeb.SpringBoot.Service.CategoryService;
 import LapTrinhWeb.SpringBoot.Service.VideoService;
+import LapTrinhWeb.SpringBoot.Service.FileStorageService;
 
 @Controller
 @RequestMapping("/admin/videos")
@@ -33,6 +35,9 @@ public class VideoController {
 
 	@Autowired
 	CategoryService categoryService;
+
+	@Autowired
+	FileStorageService fileStorageService;
 
 	@GetMapping("add")
 	public String add(ModelMap model) {
@@ -70,36 +75,63 @@ public class VideoController {
 	}
 
 	@PostMapping("saveOrUpdate")
-	public ModelAndView saveOrUpdate(ModelMap model, @ModelAttribute("video") VideoModel videoModel) {
+	public ModelAndView saveOrUpdate(ModelMap model, 
+			@ModelAttribute("video") VideoModel videoModel,
+			@org.springframework.web.bind.annotation.RequestParam(value = "posterFile", required = false) MultipartFile posterFile) {
 		Video entity;
 		
-		// Nếu là edit, lấy video hiện tại
-		if (videoModel.getIsEdit() != null && videoModel.getIsEdit() && videoModel.getVideold() != null) {
-			Optional<Video> existingVideo = videoService.findById(videoModel.getVideold());
-			if (existingVideo.isPresent()) {
-				entity = existingVideo.get();
+		try {
+			// Nếu là edit, lấy video hiện tại
+			if (videoModel.getIsEdit() != null && videoModel.getIsEdit() && videoModel.getVideold() != null) {
+				Optional<Video> existingVideo = videoService.findById(videoModel.getVideold());
+				if (existingVideo.isPresent()) {
+					entity = existingVideo.get();
+				} else {
+					entity = new Video();
+				}
 			} else {
 				entity = new Video();
 			}
-		} else {
-			entity = new Video();
-		}
-		
-		// Copy properties thủ công để tránh lỗi binding
-		if (videoModel.getTitle() != null) {
-			entity.setTitle(videoModel.getTitle());
-		}
-		if (videoModel.getPoster() != null) {
-			entity.setPoster(videoModel.getPoster());
-		}
-		if (videoModel.getViews() != null) {
-			entity.setViews(videoModel.getViews());
-		}
-		if (videoModel.getDescription() != null) {
-			entity.setDescription(videoModel.getDescription());
-		}
-		if (videoModel.getActive() != null) {
-			entity.setActive(videoModel.getActive());
+			
+			// Copy properties thủ công
+			if (videoModel.getTitle() != null) {
+				entity.setTitle(videoModel.getTitle());
+			}
+			if (videoModel.getViews() != null) {
+				entity.setViews(videoModel.getViews());
+			}
+			if (videoModel.getDescription() != null) {
+				entity.setDescription(videoModel.getDescription());
+			}
+			if (videoModel.getActive() != null) {
+				entity.setActive(videoModel.getActive());
+			}
+			
+			// Xử lý upload poster
+			String oldPoster = entity.getPoster();
+			if (posterFile != null && !posterFile.isEmpty()) {
+				// Xóa poster cũ nếu có
+				if (oldPoster != null && !oldPoster.isEmpty() && !oldPoster.startsWith("http")) {
+					fileStorageService.deleteFile(oldPoster);
+				}
+				
+				// Lưu poster mới
+				String newPosterPath = fileStorageService.storeFile(posterFile);
+				entity.setPoster(newPosterPath);
+			} else {
+				// Nếu không upload poster mới, sử dụng URL từ form hoặc giữ nguyên
+				if (videoModel.getPoster() != null && !videoModel.getPoster().isEmpty()) {
+					entity.setPoster(videoModel.getPoster());
+				} else if (oldPoster != null) {
+					entity.setPoster(oldPoster);
+				}
+			}
+		} catch (Exception e) {
+			model.addAttribute("error", "Lỗi khi xử lý dữ liệu: " + e.getMessage());
+			model.addAttribute("video", videoModel);
+			List<Category> categories = categoryService.findAll();
+			model.addAttribute("categories", categories);
+			return new ModelAndView("admin/videos/addOrEdit", model);
 		}
 
 		if (videoModel.getCategoryId() != null) {

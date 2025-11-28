@@ -1,31 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trang Chủ - Quản Lý Sinh Viên</title>
+<title>Trang Chủ - Đặc Sản Việt</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 	body {
-		background: #0f0f23;
+		background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0f1419 100%);
 		color: #ffffff;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		min-height: 100vh;
+		position: relative;
+		overflow-x: hidden;
+	}
+	
+	body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: 
+			radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+			radial-gradient(circle at 80% 80%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+		z-index: 0;
+		pointer-events: none;
+	}
+	
+	.container-fluid {
+		position: relative;
+		z-index: 1;
 	}
 	
 	.hero-section {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-		padding: 100px 0;
+		background: linear-gradient(135deg, #ff6b35 0%, #f7931e 30%, #ff8c42 70%, #ffa726 100%);
+		padding: 150px 0;
 		color: white;
 		text-align: center;
-		border-radius: 24px;
-		margin-bottom: 50px;
+		border-radius: 40px;
+		margin-bottom: 80px;
 		position: relative;
 		overflow: hidden;
-		box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+		box-shadow: 0 30px 100px rgba(255, 107, 53, 0.5);
+		border: 2px solid rgba(255, 255, 255, 0.1);
+	}
+	
+	.hero-section::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: 
+			radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+			radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+		pointer-events: none;
 	}
 	
 	.hero-section::before {
@@ -50,19 +85,30 @@
 	}
 	
 	.hero-section h1 {
-		font-size: 3.5rem;
-		font-weight: 800;
-		margin-bottom: 24px;
-		text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
-		letter-spacing: -1px;
+		font-size: 4rem;
+		font-weight: 900;
+		margin-bottom: 30px;
+		text-shadow: 3px 6px 12px rgba(0,0,0,0.4);
+		letter-spacing: -2px;
+		position: relative;
+		z-index: 2;
+		background: linear-gradient(45deg, #ffffff, #fff3e0);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
 	}
 	
 	.hero-section p {
-		font-size: 1.3rem;
-		margin-bottom: 40px;
+		font-size: 1.4rem;
+		margin-bottom: 50px;
 		opacity: 0.95;
-		font-weight: 400;
-		line-height: 1.6;
+		font-weight: 500;
+		line-height: 1.7;
+		position: relative;
+		z-index: 2;
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 	
 	.btn-admin {
@@ -233,8 +279,26 @@
 	<div class="container-fluid px-4" style="padding-top: 20px;">
 		<div class="hero-section">
 			<div class="hero-content">
-				<h1><i class="fas fa-graduation-cap"></i> Chào Mừng Đến Hệ Thống Quản Lý Sinh Viên</h1>
-				<p>Quản lý thông tin người dùng, danh mục và video một cách dễ dàng và hiệu quả</p>
+				<h1>
+					<i class="fas fa-utensils" style="margin-right: 20px; font-size: 3.5rem; animation: bounce 2s infinite;"></i>
+					Đặc Sản Việt Nam
+				</h1>
+				<p>Khám phá hương vị truyền thống • Chia sẻ công thức độc đáo • Kết nối văn hóa ẩm thực</p>
+				
+				<div class="stats-container" style="display: flex; justify-content: center; gap: 60px; margin: 40px 0; position: relative; z-index: 2;">
+					<div class="stat-item" style="text-align: center;">
+						<div style="font-size: 2.5rem; font-weight: 800; color: #fff3e0;">100+</div>
+						<div style="font-size: 1rem; opacity: 0.9;">Món Ăn</div>
+					</div>
+					<div class="stat-item" style="text-align: center;">
+						<div style="font-size: 2.5rem; font-weight: 800; color: #fff3e0;">50+</div>
+						<div style="font-size: 1rem; opacity: 0.9;">Video</div>
+					</div>
+					<div class="stat-item" style="text-align: center;">
+						<div style="font-size: 2.5rem; font-weight: 800; color: #fff3e0;">3</div>
+						<div style="font-size: 1rem; opacity: 0.9;">Vùng Miền</div>
+					</div>
+				</div>
 				<c:if test="${isAdmin}">
 					<a href="<c:url value='/admin/users' />" class="btn-admin">
 						<i class="fas fa-cog"></i> Vào Trang Quản Trị
@@ -285,7 +349,7 @@
 								<i class="fas fa-users"></i>
 							</div>
 							<h4>Quản Lý Người Dùng</h4>
-							<p>Quản lý thông tin tất cả người dùng trong hệ thống một cách hiệu quả và dễ dàng</p>
+							<p>Quản lý thông tin tất cả người dùng, đầu bếp và food blogger trong hệ thống</p>
 						</div>
 					</a>
 				</div>
@@ -293,10 +357,10 @@
 					<a href="<c:url value='/admin/categories' />" style="text-decoration: none; color: inherit;">
 						<div class="card feature-card">
 							<div class="feature-icon">
-								<i class="fas fa-folder"></i>
+								<i class="fas fa-utensils"></i>
 							</div>
-							<h4>Quản Lý Danh Mục</h4>
-							<p>Tổ chức và quản lý các danh mục video với giao diện trực quan và thân thiện</p>
+							<h4>Danh Mục Món Ăn</h4>
+							<p>Phân loại các món ăn theo vùng miền: Bắc - Trung - Nam và các loại món đặc biệt</p>
 						</div>
 					</a>
 				</div>
@@ -306,8 +370,8 @@
 							<div class="feature-icon">
 								<i class="fas fa-video"></i>
 							</div>
-							<h4>Quản Lý Video</h4>
-							<p>Quản lý video với tính năng tìm kiếm thông minh và phân loại linh hoạt</p>
+							<h4>Video Món Ăn</h4>
+							<p>Quản lý video hướng dẫn nấu ăn, review món ăn và chia sẻ bí quyết làm bánh</p>
 						</div>
 					</a>
 				</div>

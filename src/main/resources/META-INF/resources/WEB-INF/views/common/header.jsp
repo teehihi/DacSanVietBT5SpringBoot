@@ -54,6 +54,22 @@
 		box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
 	}
 	
+	.student-info {
+		margin-left: 20px;
+		padding: 8px 15px;
+		background: rgba(255, 107, 53, 0.1);
+		border-radius: 20px;
+		border: 1px solid rgba(255, 107, 53, 0.2);
+		backdrop-filter: blur(10px);
+		transition: all 0.3s ease;
+	}
+	
+	.student-info:hover {
+		background: rgba(255, 107, 53, 0.2);
+		border-color: rgba(255, 107, 53, 0.4);
+		transform: translateY(-2px);
+	}
+	
 	.nav-link-custom {
 		color: rgba(255, 255, 255, 0.8) !important;
 		font-weight: 500;
@@ -210,8 +226,12 @@
 	<div class="container-fluid px-4">
 		<a class="navbar-brand navbar-brand-custom" href="<c:url value='/home' />">
 			<img src="https://files.catbox.moe/c373f9.webp" alt="Logo" class="brand-logo">
-			<span>Đặc Sản Việt</span>
 		</a>
+		<div class="student-info">
+			<small style="color: rgba(255, 255, 255, 0.8); font-size: 0.85rem; font-weight: 500;">
+				SV: Nguyễn Nhật Thiên - MSSV: 23110153
+			</small>
+		</div>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
 			style="border-color: rgba(255,255,255,0.3);">
 			<span class="navbar-toggler-icon"></span>

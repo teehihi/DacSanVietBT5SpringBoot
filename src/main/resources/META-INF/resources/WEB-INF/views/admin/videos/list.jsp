@@ -5,40 +5,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Danh Sách Video - Quản Lý Sinh Viên</title>
+<title>Danh Sách Video - Đặc Sản Việt</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 	body {
-		background: #0f0f23;
+		background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0f1419 100%);
 		color: #ffffff;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		min-height: 100vh;
+		position: relative;
+		overflow-x: hidden;
+	}
+	
+	body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: 
+			radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+			radial-gradient(circle at 80% 80%, rgba(247, 147, 30, 0.1) 0%, transparent 50%);
+		z-index: 0;
+		pointer-events: none;
+	}
+	
+	.container-fluid {
+		position: relative;
+		z-index: 1;
 	}
 	.card {
-		background: #16213e;
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 16px;
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+		background: rgba(22, 33, 62, 0.9);
+		border: 1px solid rgba(255, 107, 53, 0.2);
+		border-radius: 20px;
+		box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+		backdrop-filter: blur(15px);
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	}
+	
+	.card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 25px 60px rgba(255, 107, 53, 0.15);
+		border-color: rgba(255, 107, 53, 0.4);
+	}
+	
 	.card-header {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
 		color: white;
-		border-radius: 16px 16px 0 0 !important;
-		padding: 20px 24px;
-		font-weight: 600;
+		border-radius: 20px 20px 0 0 !important;
+		padding: 25px 30px;
+		font-weight: 700;
 		border: none;
 	}
-	.btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; }
+	
+	.btn-primary { 
+		background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); 
+		border: none; 
+		border-radius: 12px;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+	}
+	
+	.btn-primary:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+	}
 	.btn-success { background: #10b981; border: none; }
 	.btn-danger { background: #ef4444; border: none; }
 	.btn-warning { background: #f59e0b; border: none; }
 	.btn-info { background: #3b82f6; border: none; }
-	.table { background: #16213e; color: #ffffff; }
-	.table thead { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-	.table tbody tr { border-color: rgba(255, 255, 255, 0.1); }
-	.table tbody tr:hover { background-color: rgba(102, 126, 234, 0.1); }
-	.table td, .table th { border-color: rgba(255, 255, 255, 0.1); }
+	.table { 
+		background: transparent; 
+		color: #ffffff; 
+		border-radius: 15px;
+		overflow: hidden;
+	}
+	.table thead { 
+		background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); 
+		color: white;
+	}
+	.table tbody tr { 
+		border-color: rgba(255, 107, 53, 0.2); 
+		background: rgba(22, 33, 62, 0.6);
+		transition: all 0.3s ease;
+	}
+	.table tbody tr:hover { 
+		background: rgba(255, 107, 53, 0.15);
+		transform: translateX(5px);
+	}
+	.table td, .table th { 
+		border-color: rgba(255, 107, 53, 0.2); 
+		padding: 15px;
+		vertical-align: middle;
+	}
 	.badge.bg-success { background: #10b981 !important; }
 	.badge.bg-danger { background: #ef4444 !important; }
 	.badge.bg-info { background: #3b82f6 !important; }

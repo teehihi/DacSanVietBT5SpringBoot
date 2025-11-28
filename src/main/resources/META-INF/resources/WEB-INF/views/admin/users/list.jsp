@@ -93,11 +93,30 @@
 	.btn-danger { background: #ef4444; border: none; }
 	.btn-warning { background: #f59e0b; border: none; }
 	.btn-info { background: #3b82f6; border: none; }
-	.table { background: #16213e; color: #ffffff; }
-	.table thead { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-	.table tbody tr { border-color: rgba(255, 255, 255, 0.1); }
-	.table tbody tr:hover { background-color: rgba(102, 126, 234, 0.1); }
-	.table td, .table th { border-color: rgba(255, 255, 255, 0.1); }
+	.table { 
+		background: transparent; 
+		color: #ffffff; 
+		border-radius: 15px;
+		overflow: hidden;
+	}
+	.table thead { 
+		background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); 
+		color: white;
+	}
+	.table tbody tr { 
+		border-color: rgba(255, 107, 53, 0.2); 
+		background: rgba(22, 33, 62, 0.6);
+		transition: all 0.3s ease;
+	}
+	.table tbody tr:hover { 
+		background: rgba(255, 107, 53, 0.15);
+		transform: translateX(5px);
+	}
+	.table td, .table th { 
+		border-color: rgba(255, 107, 53, 0.2); 
+		padding: 15px;
+		vertical-align: middle;
+	}
 	.badge.bg-success { background: #10b981 !important; }
 	.badge.bg-danger { background: #ef4444 !important; }
 	.badge.bg-info { background: #3b82f6 !important; }
