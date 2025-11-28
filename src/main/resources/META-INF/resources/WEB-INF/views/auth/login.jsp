@@ -5,296 +5,282 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đăng Nhập - Quản Lý Sinh Viên</title>
+<title>Đăng Nhập - Đặc Sản Việt</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-	
+	/* --- CẤU HÌNH NỀN TỐI --- */
 	body {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+		background-color: #080b12;
+		/* Gradient nền giống Hero Section */
+		background-image: radial-gradient(circle at 10% 20%, rgba(255, 87, 34, 0.1) 0%, transparent 40%),
+						  radial-gradient(circle at 90% 80%, rgba(234, 60, 18, 0.1) 0%, transparent 40%);
 		min-height: 100vh;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		font-family: 'Segoe UI', sans-serif;
+		color: #fff;
 		position: relative;
 		overflow: hidden;
 	}
-	
+
+	/* Hiệu ứng hạt bụi bay (Animation) */
 	body::before {
 		content: '';
 		position: absolute;
-		width: 200%;
-		height: 200%;
-		background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-		background-size: 50px 50px;
-		animation: move 20s linear infinite;
-		opacity: 0.3;
+		width: 100%;
+		height: 100%;
+		background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==');
+		animation: moveBackground 50s linear infinite;
+		opacity: 0.5;
+		z-index: 0;
 	}
 	
-	@keyframes move {
-		0% { transform: translate(0, 0); }
-		100% { transform: translate(50px, 50px); }
+	@keyframes moveBackground {
+		from { background-position: 0 0; }
+		to { background-position: 1000px 1000px; }
 	}
-	
+
 	.login-container {
 		position: relative;
 		z-index: 1;
 		width: 100%;
-		max-width: 450px;
+		max-width: 420px;
 		padding: 20px;
 	}
-	
+
+	/* --- CARD GIAO DIỆN --- */
 	.login-card {
-		background: rgba(255, 255, 255, 0.95);
-		backdrop-filter: blur(10px);
-		border-radius: 20px;
-		box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+		background: #111621; /* Nền card tối */
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 24px;
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); /* Bóng đen sâu */
 		overflow: hidden;
-		transition: transform 0.3s ease;
+		padding: 40px 30px;
 	}
-	
-	.login-card:hover {
-		transform: translateY(-5px);
-	}
-	
-	.card-header-custom {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		color: white;
-		padding: 30px;
+
+	/* Logo & Tiêu đề */
+	.brand-header {
 		text-align: center;
-		position: relative;
+		margin-bottom: 30px;
 	}
-	
-	.card-header-custom::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 4px;
-		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+
+	.brand-logo {
+		width: 70px;
+		height: 70px;
+		border-radius: 18px;
+		margin-bottom: 15px;
+		box-shadow: 0 0 20px rgba(255, 87, 34, 0.3);
+		object-fit: cover;
 	}
-	
-	.card-header-custom h3 {
-		margin: 0;
-		font-weight: 600;
-		font-size: 28px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 10px;
+
+	.login-title {
+		font-weight: 700;
+		font-size: 1.8rem;
+		margin-bottom: 5px;
+		color: #fff;
 	}
-	
-	.card-header-custom i {
-		font-size: 32px;
+
+	.login-subtitle {
+		color: #a0aec0;
+		font-size: 0.95rem;
 	}
-	
-	.card-body {
-		padding: 40px;
-	}
-	
+
+	/* --- FORM INPUTS --- */
 	.form-label {
-		font-weight: 600;
-		color: #333;
-		margin-bottom: 8px;
+		color: #e2e8f0;
+		font-weight: 500;
+		font-size: 0.9rem;
 	}
-	
-	.input-group {
-		margin-bottom: 20px;
-	}
-	
+
 	.input-group-text {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		color: white;
-		border: none;
-		border-radius: 10px 0 0 10px;
-		width: 50px;
-		justify-content: center;
+		background: #1a202c;
+		border: 1px solid #2d3748;
+		border-right: none;
+		color: #ff7043; /* Icon màu cam */
+		border-radius: 12px 0 0 12px;
 	}
-	
+
 	.form-control {
-		border-radius: 0 10px 10px 0;
-		border: 2px solid #e0e0e0;
+		background: #1a202c;
+		border: 1px solid #2d3748;
+		border-left: none;
+		color: #fff;
 		padding: 12px 15px;
-		transition: all 0.3s ease;
+		border-radius: 0 12px 12px 0;
 	}
-	
+
 	.form-control:focus {
-		border-color: #667eea;
-		box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+		background: #1a202c;
+		color: #fff;
+		border-color: #ff5722;
+		box-shadow: none;
 	}
-	
+
+	.form-control:focus + .input-group-text,
+	.input-group:focus-within .input-group-text {
+		border-color: #ff5722;
+	}
+
+	.form-control::placeholder {
+		color: #718096;
+	}
+
+	/* --- BUTTONS --- */
 	.btn-login {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		background: linear-gradient(45deg, #ff5722, #ff8a50);
 		border: none;
-		border-radius: 10px;
-		padding: 12px 30px;
-		font-weight: 600;
-		font-size: 16px;
-		transition: all 0.3s ease;
-		box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+		border-radius: 50px;
+		padding: 12px;
+		font-weight: 700;
+		width: 100%;
+		color: white;
+		margin-top: 10px;
+		transition: all 0.3s;
+		box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
 	}
-	
+
 	.btn-login:hover {
 		transform: translateY(-2px);
-		box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-	}
-	
-	.btn-register {
-		border: 2px solid #667eea;
-		color: #667eea;
-		border-radius: 10px;
-		padding: 12px 30px;
-		font-weight: 600;
-		transition: all 0.3s ease;
-	}
-	
-	.btn-register:hover {
-		background: #667eea;
+		box-shadow: 0 8px 25px rgba(255, 87, 34, 0.5);
 		color: white;
-		transform: translateY(-2px);
 	}
-	
-	.alert {
-		border-radius: 10px;
-		border: none;
-		margin-bottom: 20px;
-	}
-	
-	.brand-logo {
-		width: 60px;
-		height: 60px;
-		background: white;
-		border-radius: 15px;
+
+	.divider {
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		margin: 0 auto 15px;
-		box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+		text-align: center;
+		color: #718096;
+		margin: 25px 0;
+		font-size: 0.85rem;
 	}
-	
-	.brand-logo i {
-		font-size: 32px;
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
+
+	.divider::before, .divider::after {
+		content: '';
+		flex: 1;
+		border-bottom: 1px solid rgba(255,255,255,0.1);
 	}
-	
-	.form-check {
-		display: flex;
-		align-items: center;
-		gap: 10px;
+
+	.divider span {
+		padding: 0 10px;
+	}
+
+	.btn-register-link {
+		background: transparent;
+		border: 1px solid rgba(255,255,255,0.2);
+		color: #e2e8f0;
+		border-radius: 50px;
 		padding: 10px;
-		background: rgba(102, 126, 234, 0.05);
-		border-radius: 8px;
-		transition: all 0.3s ease;
+		width: 100%;
+		font-weight: 600;
+		transition: all 0.3s;
+		display: block;
+		text-align: center;
+		text-decoration: none;
 	}
-	
-	.form-check:hover {
-		background: rgba(102, 126, 234, 0.1);
+
+	.btn-register-link:hover {
+		border-color: #ff5722;
+		color: #ff5722;
+		background: rgba(255, 87, 34, 0.05);
 	}
-	
+
+	/* Checkbox & Alerts */
 	.form-check-input {
-		width: 20px;
-		height: 20px;
+		background-color: #2d3748;
+		border-color: #4a5568;
 		cursor: pointer;
-		border: 2px solid #667eea;
-		border-radius: 4px;
 	}
 	
 	.form-check-input:checked {
-		background-color: #667eea;
-		border-color: #667eea;
+		background-color: #ff5722;
+		border-color: #ff5722;
 	}
 	
 	.form-check-label {
+		color: #a0aec0;
+		font-size: 0.9rem;
 		cursor: pointer;
-		color: #333;
-		font-weight: 500;
-		margin: 0;
+	}
+
+	.alert {
+		background: rgba(255, 50, 50, 0.1);
+		border: 1px solid rgba(255, 50, 50, 0.2);
+		color: #ff8a80;
+		font-size: 0.9rem;
+		border-radius: 12px;
 	}
 	
-	.form-check-label i {
-		color: #667eea;
-		margin-right: 5px;
+	.alert-success {
+		background: rgba(0, 200, 83, 0.1);
+		border-color: rgba(0, 200, 83, 0.2);
+		color: #69f0ae;
 	}
 </style>
 </head>
 <body>
 	<div class="login-container">
 		<div class="login-card">
-			<div class="card-header-custom">
-				<div class="brand-logo">
-					<i class="fas fa-graduation-cap"></i>
+			<div class="brand-header">
+				<img src="https://files.catbox.moe/c373f9.webp" alt="Logo" class="brand-logo">
+				<h3 class="login-title">Đăng Nhập</h3>
+				<p class="login-subtitle">Chào mừng bạn trở lại với Đặc Sản Việt</p>
+			</div>
+
+			<c:if test="${message != null}">
+				<div class="alert alert-success alert-dismissible fade show">
+					<i class="fas fa-check-circle me-2"></i> ${message}
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
 				</div>
-				<h3><i class="fas fa-sign-in-alt"></i> Đăng Nhập</h3>
-				<p class="mb-0 mt-2" style="opacity: 0.9;">Chào mừng bạn trở lại!</p>
-			</div>
-			<div class="card-body">
-				<!-- Hiển thị thông báo -->
-				<c:if test="${message != null}">
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
-						<i class="fas fa-check-circle"></i> ${message}
-						<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			</c:if>
+			
+			<c:if test="${error != null}">
+				<div class="alert alert-danger alert-dismissible fade show">
+					<i class="fas fa-exclamation-triangle me-2"></i> ${error}
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+				</div>
+			</c:if>
+
+			<form action="<c:url value='/login' />" method="POST">
+				<div class="mb-4">
+					<label for="username" class="form-label">Tên đăng nhập</label>
+					<div class="input-group">
+						<span class="input-group-text"><i class="fas fa-user"></i></span>
+						<input type="text" class="form-control" id="username" name="username" 
+							placeholder="Nhập username" required autofocus>
 					</div>
-				</c:if>
+				</div>
 				
-				<!-- Hiển thị lỗi -->
-				<c:if test="${error != null}">
-					<div class="alert alert-danger alert-dismissible fade show" role="alert">
-						<i class="fas fa-exclamation-circle"></i> ${error}
-						<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+				<div class="mb-4">
+					<label for="password" class="form-label">Mật khẩu</label>
+					<div class="input-group">
+						<span class="input-group-text"><i class="fas fa-lock"></i></span>
+						<input type="password" class="form-control" id="password" name="password" 
+							placeholder="Nhập mật khẩu" required>
 					</div>
-				</c:if>
+				</div>
 				
-						<form action="<c:url value='/login' />" method="POST">
-					<div class="mb-4">
-						<label for="username" class="form-label">Username</label>
-						<div class="input-group">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-							<input type="text" class="form-control" id="username" name="username" 
-								placeholder="Nhập username của bạn" required autofocus>
-						</div>
+				<div class="d-flex justify-content-between align-items-center mb-4">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe" value="true">
+						<label class="form-check-label" for="rememberMe">Ghi nhớ tôi</label>
 					</div>
-					
-					<div class="mb-4">
-						<label for="password" class="form-label">Password</label>
-						<div class="input-group">
-							<span class="input-group-text"><i class="fas fa-lock"></i></span>
-							<input type="password" class="form-control" id="password" name="password" 
-								placeholder="Nhập password của bạn" required>
-						</div>
-					</div>
-					
-					<div class="mb-4">
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe" value="true">
-							<label class="form-check-label" for="rememberMe">
-								<i class="fas fa-bookmark"></i> Ghi nhớ đăng nhập
-							</label>
-						</div>
-					</div>
-					
-					<div class="d-grid gap-2 mb-3">
-						<button type="submit" class="btn btn-primary btn-login">
-							<i class="fas fa-sign-in-alt"></i> Đăng Nhập
-						</button>
-					</div>
-					
-					<div class="text-center">
-						<a href="<c:url value='/register' />" class="btn btn-outline-primary btn-register w-100">
-							<i class="fas fa-user-plus"></i> Chưa có tài khoản? Đăng ký ngay
-						</a>
-					</div>
-				</form>
-			</div>
+					<a href="#" class="text-decoration-none" style="color: #ff7043; font-size: 0.9rem;">Quên mật khẩu?</a>
+				</div>
+				
+				<button type="submit" class="btn btn-login">
+					ĐĂNG NHẬP
+				</button>
+				
+				<div class="divider">
+					<span>Chưa có tài khoản?</span>
+				</div>
+				
+				<a href="<c:url value='/register' />" class="btn btn-register-link">
+					Tạo tài khoản mới
+				</a>
+			</form>
 		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

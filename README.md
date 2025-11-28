@@ -1,4 +1,75 @@
-# Hướng Dẫn Cấu Hình Admin
+# BaiTap5 Spring Boot Project
+
+## 📌 Giới thiệu
+
+Dự án Spring Boot quản lý người dùng, danh mục, video với phân quyền Admin/User.  
+Sử dụng **JSP + Spring MVC + Spring Security + JPA Hibernate**.
+
+---
+
+## 📂 Cấu trúc thư mục
+
+```plaintext
+src/main/java/LapTrinhWeb.SpringBoot/
+ ├── Config/
+ ├── Controller/
+ ├── Entity/
+ ├── Model/
+ ├── Repository/
+ ├── Service/
+ └── BaiTap5SpringBootApplication.java
+
+src/main/resources/
+ ├── META-INF/resources/WEB-INF/views/
+ │   ├── admin/categories (add.jsp, list.jsp,…)
+ │   ├── auth (login.jsp, register.jsp)
+ │   ├── user (home.jsp, profile.jsp)
+ │   ├── common (header.jsp, footer.jsp)
+ ├── static/
+ ├── templates/
+ └── application.properties
+```
+
+---
+
+## 🚀 Hướng dẫn sử dụng
+
+### Cài đặt và chạy dự án
+1. Clone project từ GitHub
+```bash
+git clone https://github.com/teehihi/DacSanVietBT5SpringBoot.git
+cd DacSanVietBT5SpringBoot
+```
+2. Cấu hình database trong ```src/main/resources/application.properties```
+
+```bash
+server.port=8089
+
+spring.datasource.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+spring.datasource.url=jdbc:sqlserver://{yourDbServer}; databaseName=QuanLySVSpringDB;trustServerCertificate=true;encrypt=true;
+spring.datasource.username=YourDbUsername
+spring.datasource.password=YourDbPassword
+
+spring.jpa.show-sql=true
+```
+⚠ Hãy đảm bảo đã tạo DB QuanLySVSpringDB trong SQL Server trước khi chạy.
+
+3. Chạy dự án
+
+```bash
+mvn spring-boot:run
+```
+Sau đó truy cập trình duyệt:
+```
+http://localhost:8080
+```
+Quy trình trên sẽ cực kỳ đơn giản nếu dùng SpringToolSuite: 
+- Bật Boot Dashboard
+- Chuột phải vào project trong bảng controll bên trong mục local
+- Chọn (Re)start sau đó click đúp vào tên project tại chỗ đó 
+---
+
+## 🔐 Cấu hình tài khoản Admin
 
 ## Cách 1: Đăng ký tài khoản và cập nhật qua Database
 
@@ -63,3 +134,19 @@ Sau khi cấu hình, đăng nhập lại và kiểm tra:
 - **Active status:** User phải có `active = 1` mới có thể đăng nhập
 - **Security:** Đảm bảo chỉ có user admin mới có thể chỉnh sửa quyền của user khác
 
+
+---
+
+## 🌍 Giao diện trang chủ
+
+![Trang chủ](https://files.catbox.moe/otbqpi.png)
+
+---
+
+## 🧑‍💻 Tác giả
+
+**Nguyễn Nhật Thiên (TEE)**  
+📧 GitHub: https://github.com/teehihi  
+🔗 Linktree: https://linktr.ee/nkqt.tee
+
+---

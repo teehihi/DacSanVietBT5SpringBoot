@@ -5,261 +5,240 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đăng Ký - Quản Lý Sinh Viên</title>
+<title>Đăng Ký - Đặc Sản Việt</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-	
+	/* --- Dùng chung style với Login để đồng bộ --- */
 	body {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+		background-color: #080b12;
+		background-image: radial-gradient(circle at 10% 20%, rgba(255, 87, 34, 0.1) 0%, transparent 40%),
+						  radial-gradient(circle at 90% 80%, rgba(234, 60, 18, 0.1) 0%, transparent 40%);
 		min-height: 100vh;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-		position: relative;
+		font-family: 'Segoe UI', sans-serif;
+		color: #fff;
 		overflow-x: hidden;
-		padding: 20px 0;
+		padding: 40px 20px;
 	}
-	
+
+    /* Giữ hiệu ứng hạt bụi */
 	body::before {
 		content: '';
 		position: absolute;
-		width: 200%;
-		height: 200%;
-		background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-		background-size: 50px 50px;
-		animation: move 20s linear infinite;
-		opacity: 0.3;
+		width: 100%;
+		height: 100%;
+		background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==');
+		animation: moveBackground 50s linear infinite;
+		opacity: 0.5;
+		z-index: 0;
 	}
-	
-	@keyframes move {
-		0% { transform: translate(0, 0); }
-		100% { transform: translate(50px, 50px); }
+
+	@keyframes moveBackground {
+		from { background-position: 0 0; }
+		to { background-position: 1000px 1000px; }
 	}
-	
+
 	.register-container {
 		position: relative;
 		z-index: 1;
 		width: 100%;
-		max-width: 600px;
-		padding: 20px;
+		max-width: 650px; /* Rộng hơn login chút */
 	}
-	
+
 	.register-card {
-		background: rgba(255, 255, 255, 0.95);
-		backdrop-filter: blur(10px);
-		border-radius: 20px;
-		box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-		overflow: hidden;
-		transition: transform 0.3s ease;
-	}
-	
-	.register-card:hover {
-		transform: translateY(-5px);
-	}
-	
-	.card-header-custom {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		color: white;
-		padding: 30px;
-		text-align: center;
-		position: relative;
-	}
-	
-	.card-header-custom::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 4px;
-		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-	}
-	
-	.card-header-custom h3 {
-		margin: 0;
-		font-weight: 600;
-		font-size: 28px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 10px;
-	}
-	
-	.card-body {
+		background: #111621;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 24px;
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 		padding: 40px;
 	}
-	
-	.form-label {
-		font-weight: 600;
-		color: #333;
-		margin-bottom: 8px;
+
+	.brand-header {
+		text-align: center;
+		margin-bottom: 35px;
 	}
-	
-	.form-control {
-		border-radius: 10px;
-		border: 2px solid #e0e0e0;
-		padding: 12px 15px;
-		transition: all 0.3s ease;
-		margin-bottom: 5px;
-	}
-	
-	.form-control:focus {
-		border-color: #667eea;
-		box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-	}
-	
-	.btn-register-submit {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		border: none;
-		border-radius: 10px;
-		padding: 12px 30px;
-		font-weight: 600;
-		font-size: 16px;
-		transition: all 0.3s ease;
-		box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-	}
-	
-	.btn-register-submit:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-	}
-	
-	.btn-login-link {
-		border: 2px solid #667eea;
-		color: #667eea;
-		border-radius: 10px;
-		padding: 12px 30px;
-		font-weight: 600;
-		transition: all 0.3s ease;
-	}
-	
-	.btn-login-link:hover {
-		background: #667eea;
-		color: white;
-		transform: translateY(-2px);
-	}
-	
-	.alert {
-		border-radius: 10px;
-		border: none;
-		margin-bottom: 20px;
-	}
-	
-	.brand-logo {
-		width: 60px;
-		height: 60px;
-		background: white;
-		border-radius: 15px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 0 auto 15px;
-		box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-	}
-	
-	.brand-logo i {
-		font-size: 32px;
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+    /* Icon đăng ký gradient cam */
+	.icon-header {
+		font-size: 3rem;
+        background: linear-gradient(45deg, #ff5722, #ff8a50);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
-		background-clip: text;
+		margin-bottom: 10px;
+        display: inline-block;
 	}
-	
-	.text-danger {
-		color: #dc3545 !important;
+
+	.register-title {
+		font-weight: 700;
+		font-size: 1.8rem;
+		color: #fff;
 	}
-	
-	.text-muted {
-		font-size: 0.875rem;
+
+	.form-label {
+		color: #e2e8f0;
+		font-weight: 500;
+		font-size: 0.9rem;
 	}
+    
+    .text-danger {
+        color: #ff5252 !important;
+    }
+
+	.form-control {
+		background: #1a202c;
+		border: 1px solid #2d3748;
+		color: #fff;
+		padding: 12px 15px;
+		border-radius: 12px;
+	}
+
+	.form-control:focus {
+		background: #1a202c;
+		color: #fff;
+		border-color: #ff5722;
+		box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
+	}
+
+	.form-control::placeholder {
+		color: #718096;
+	}
+
+	.btn-register {
+		background: linear-gradient(45deg, #ff5722, #ff8a50);
+		border: none;
+		border-radius: 50px;
+		padding: 12px;
+		font-weight: 700;
+		width: 100%;
+		color: white;
+		margin-top: 20px;
+		transition: all 0.3s;
+		box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+	}
+
+	.btn-register:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(255, 87, 34, 0.5);
+		color: white;
+	}
+
+	.login-link {
+        text-align: center;
+        margin-top: 25px;
+        color: #a0aec0;
+        font-size: 0.95rem;
+    }
+
+    .login-link a {
+        color: #ff7043;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* Note Box */
+    .note-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px dashed rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 15px;
+        margin-top: 30px;
+        font-size: 0.85rem;
+        color: #a0aec0;
+    }
+    
+    .note-box strong {
+        color: #ff8a65;
+    }
+
+	.alert {
+		background: rgba(255, 50, 50, 0.1);
+		border: 1px solid rgba(255, 50, 50, 0.2);
+		color: #ff8a80;
+		border-radius: 12px;
+	}
+    
+    .form-text {
+        color: #718096;
+        font-size: 0.8rem;
+    }
 </style>
 </head>
 <body>
 	<div class="register-container">
 		<div class="register-card">
-			<div class="card-header-custom">
-				<div class="brand-logo">
+			<div class="brand-header">
+				<div class="icon-header">
 					<i class="fas fa-user-plus"></i>
 				</div>
-				<h3><i class="fas fa-user-plus"></i> Đăng Ký Tài Khoản</h3>
-				<p class="mb-0 mt-2" style="opacity: 0.9;">Tạo tài khoản mới để bắt đầu</p>
+				<h3 class="register-title">Đăng Ký Tài Khoản</h3>
+				<p style="color: #a0aec0;">Tham gia cộng đồng Đặc Sản Việt ngay hôm nay</p>
 			</div>
-			<div class="card-body">
-				<!-- Hiển thị lỗi -->
-				<c:if test="${error != null}">
-					<div class="alert alert-danger alert-dismissible fade show" role="alert">
-						<i class="fas fa-exclamation-circle"></i> ${error}
-						<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-					</div>
-				</c:if>
-				
-				<form action="<c:url value='/register/save' />" method="POST">
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-							<input type="text" class="form-control" id="username" name="username" 
-								value="${user.username}" placeholder="Nhập username" required>
-							<small class="text-muted">Username sẽ được dùng để đăng nhập</small>
-						</div>
-						
-						<div class="col-md-6 mb-3">
-							<label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-							<input type="password" class="form-control" id="password" name="password" 
-								placeholder="Nhập password" required minlength="6">
-							<small class="text-muted">Tối thiểu 6 ký tự</small>
-						</div>
+
+			<c:if test="${error != null}">
+				<div class="alert alert-danger alert-dismissible fade show">
+					<i class="fas fa-exclamation-triangle me-2"></i> ${error}
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+				</div>
+			</c:if>
+
+			<form action="<c:url value='/register/save' />" method="POST">
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="username" name="username" 
+							value="${user.username}" placeholder="Nhập username" required>
 					</div>
 					
-					<div class="mb-3">
-						<label for="fullname" class="form-label">Họ Tên <span class="text-danger">*</span></label>
-						<input type="text" class="form-control" id="fullname" name="fullname" 
-							value="${user.fullname}" placeholder="Nhập họ tên đầy đủ" required>
+					<div class="col-md-6 mb-3">
+						<label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+						<input type="password" class="form-control" id="password" name="password" 
+							placeholder="Tối thiểu 6 ký tự" required minlength="6">
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<label for="fullname" class="form-label">Họ và Tên <span class="text-danger">*</span></label>
+					<input type="text" class="form-control" id="fullname" name="fullname" 
+						value="${user.fullname}" placeholder="Nguyễn Văn A" required>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label for="email" class="form-label">Email</label>
+						<input type="email" class="form-control" id="email" name="email" 
+							value="${user.email}" placeholder="example@email.com">
 					</div>
 					
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<label for="email" class="form-label">Email</label>
-							<input type="email" class="form-control" id="email" name="email" 
-								value="${user.email}" placeholder="example@email.com">
-						</div>
-						
-						<div class="col-md-6 mb-3">
-							<label for="phone" class="form-label">Điện Thoại</label>
-							<input type="text" class="form-control" id="phone" name="phone" 
-								value="${user.phone}" placeholder="0123456789">
-						</div>
+					<div class="col-md-6 mb-3">
+						<label for="phone" class="form-label">Số điện thoại</label>
+						<input type="text" class="form-control" id="phone" name="phone" 
+							value="${user.phone}" placeholder="09xxxxxxx">
 					</div>
-					
-					<div class="d-grid gap-2 mb-3">
-						<button type="submit" class="btn btn-primary btn-register-submit">
-							<i class="fas fa-user-plus"></i> Đăng Ký Ngay
-						</button>
-					</div>
-					
-					<div class="text-center">
-						<a href="<c:url value='/login' />" class="btn btn-outline-primary btn-login-link w-100">
-							<i class="fas fa-sign-in-alt"></i> Đã có tài khoản? Đăng nhập
-						</a>
-					</div>
-					
-					<hr class="my-4">
-					
-					<div class="alert alert-info">
-						<strong><i class="fas fa-info-circle"></i> Lưu ý:</strong>
-						<ul class="mb-0 mt-2" style="font-size: 0.9rem;">
-							<li>Tài khoản mới đăng ký mặc định là <strong>User</strong></li>
-							<li>Để trở thành <strong>Admin</strong>, vui lòng xem hướng dẫn trong file README</li>
-						</ul>
-					</div>
-				</form>
-			</div>
+				</div>
+
+				<button type="submit" class="btn btn-register">
+					<i class="fas fa-paper-plane me-2"></i> HOÀN TẤT ĐĂNG KÝ
+				</button>
+
+				<div class="login-link">
+					Đã có tài khoản? <a href="<c:url value='/login' />">Đăng nhập ngay</a>
+				</div>
+
+				<div class="note-box">
+					<i class="fas fa-info-circle me-1"></i> <strong>Lưu ý:</strong>
+					<ul class="mb-0 mt-1 ps-3">
+						<li>Tài khoản tạo mới sẽ có quyền mặc định là <strong>Member</strong>.</li>
+						<li>Để cấp quyền <strong>Admin</strong>, vui lòng liên hệ quản trị viên hệ thống.</li>
+					</ul>
+				</div>
+			</form>
 		</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

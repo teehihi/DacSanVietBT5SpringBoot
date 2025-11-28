@@ -9,8 +9,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
+    /* --- CẤU HÌNH CHUNG ĐỒNG BỘ VỚI TRANG CHỦ --- */
 	body {
-		background: #0f0f23;
+		background: #080b12; /* Màu nền tối đồng bộ */
 		color: #ffffff;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		min-height: 100vh;
@@ -22,114 +23,126 @@
 		padding: 40px 20px;
 	}
 	
+    /* --- HEADER PROFILE (Thay Gradient Tím bằng Cam Đỏ) --- */
 	.profile-header {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		border-radius: 20px;
+		background: linear-gradient(105deg, #ea3c12 0%, #991e0e 100%);
+		border-radius: 24px;
 		padding: 40px;
 		margin-bottom: 30px;
 		text-align: center;
-		box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+		box-shadow: 0 20px 60px rgba(234, 60, 18, 0.2); /* Bóng cam */
 		position: relative;
 		overflow: hidden;
 	}
 	
+    /* Hiệu ứng nền động nhẹ */
 	.profile-header::before {
 		content: '';
 		position: absolute;
 		width: 200%;
 		height: 200%;
-		background: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
-		background-size: 60px 60px;
-		animation: move 25s linear infinite;
-		opacity: 0.4;
+		background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+		background-size: 50px 50px;
+		animation: move 30s linear infinite;
+		opacity: 0.3;
+		top: -50%;
+		left: -50%;
 	}
 	
 	@keyframes move {
-		0% { transform: translate(0, 0); }
-		100% { transform: translate(60px, 60px); }
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
 	}
 	
 	.profile-avatar {
-		width: 120px;
-		height: 120px;
+		width: 130px;
+		height: 130px;
 		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.2);
-		backdrop-filter: blur(10px);
+		background: rgba(255, 255, 255, 0.15);
+		backdrop-filter: blur(5px);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		color: white;
 		font-weight: 700;
-		font-size: 48px;
-		border: 4px solid rgba(255, 255, 255, 0.3);
+		font-size: 50px;
+		border: 4px solid rgba(255, 255, 255, 0.4);
 		margin: 0 auto 20px;
 		position: relative;
 		z-index: 1;
 		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 	}
+    
+    .profile-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
 	
 	.profile-name {
-		font-size: 2.5rem;
+		font-size: 2.2rem;
 		font-weight: 800;
-		margin-bottom: 10px;
+		margin-bottom: 8px;
 		position: relative;
 		z-index: 1;
-		text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+		text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 	}
 	
 	.profile-username {
-		font-size: 1.2rem;
+		font-size: 1.1rem;
 		opacity: 0.9;
 		position: relative;
 		z-index: 1;
+		margin-bottom: 15px;
 	}
 	
 	.profile-badge {
 		display: inline-block;
-		margin-top: 15px;
-		padding: 8px 20px;
-		background: rgba(255, 255, 255, 0.2);
-		backdrop-filter: blur(10px);
-		border-radius: 20px;
+		padding: 6px 18px;
+		background: rgba(0, 0, 0, 0.2);
+		border: 1px solid rgba(255,255,255,0.2);
+		border-radius: 50px;
 		font-weight: 600;
+		font-size: 0.9rem;
 		position: relative;
 		z-index: 1;
 	}
 	
+    /* --- CARD FORM (Thay nền xanh bằng nền tối #111621) --- */
 	.profile-card {
-		background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
-		border: 1px solid rgba(102, 126, 234, 0.2);
+		background: #111621;
+		border: 1px solid rgba(255, 255, 255, 0.08);
 		border-radius: 20px;
-		padding: 32px;
-		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+		padding: 35px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 		margin-bottom: 30px;
-		backdrop-filter: blur(10px);
 	}
 	
 	.profile-card h3 {
 		color: white;
 		font-weight: 700;
-		margin-bottom: 24px;
+		margin-bottom: 25px;
 		display: flex;
 		align-items: center;
 		gap: 12px;
-		font-size: 1.5rem;
-		border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+		font-size: 1.4rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 		padding-bottom: 15px;
 	}
 	
+    /* Icon tiêu đề gradient cam */
 	.profile-card h3 i {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		background: linear-gradient(to bottom right, #ff9800, #ff5722);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
-		background-clip: text;
 	}
 	
 	.info-row {
 		display: flex;
 		align-items: center;
-		padding: 15px 0;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		padding: 18px 0;
+		border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
 	}
 	
 	.info-row:last-child {
@@ -138,16 +151,17 @@
 	
 	.info-label {
 		font-weight: 600;
-		color: rgba(102, 126, 234, 1);
-		min-width: 150px;
+		color: #ff8a65; /* Màu chữ tiêu đề cam nhạt */
+		min-width: 160px;
 		display: flex;
 		align-items: center;
-		gap: 10px;
+		gap: 12px;
 	}
 	
 	.info-label i {
 		width: 20px;
 		text-align: center;
+        color: #ff5722;
 	}
 	
 	.info-value {
@@ -155,30 +169,49 @@
 		flex: 1;
 	}
 	
-	.badge {
-		padding: 6px 16px;
-		border-radius: 20px;
-		font-weight: 600;
-		font-size: 0.85rem;
-	}
-	
-	.badge.bg-danger {
-		background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
-	}
-	
-	.badge.bg-success {
-		background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-	}
-	
-	.badge.bg-secondary {
-		background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%) !important;
-	}
-	
-	.btn-back {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* --- INPUT STYLING (Làm tối input) --- */
+    .form-control {
+        background-color: #1a202c !important; /* Nền input tối hơn nền card */
+        border: 1px solid #2d3748;
+        color: #fff !important;
+        padding: 10px 15px;
+        border-radius: 10px;
+    }
+    
+    .form-control:focus {
+        background-color: #1a202c !important;
+        border-color: #ff5722; /* Viền cam khi focus */
+        box-shadow: 0 0 0 4px rgba(255, 87, 34, 0.15);
+    }
+    
+    .form-control::placeholder {
+        color: #718096;
+    }
+
+    /* Input file custom */
+	.form-control[type="file"]::-webkit-file-upload-button {
+		background: linear-gradient(45deg, #ff5722, #ff8a50);
+		color: white;
 		border: none;
-		border-radius: 10px;
-		padding: 12px 30px;
+		padding: 8px 20px;
+		border-radius: 6px;
+		cursor: pointer;
+		margin-right: 15px;
+		font-weight: 600;
+        transition: all 0.2s;
+	}
+	
+	.form-control[type="file"]::-webkit-file-upload-button:hover {
+		filter: brightness(1.1);
+	}
+
+    /* --- BUTTONS (Đồng bộ nút cam viên thuốc) --- */
+	.btn-action {
+		background-color: #ff5722;
+        background-image: linear-gradient(45deg, #ff5722, #ff8a50);
+		border: none;
+		border-radius: 50px;
+		padding: 12px 35px;
 		font-weight: 600;
 		color: white;
 		text-decoration: none;
@@ -186,46 +219,78 @@
 		align-items: center;
 		gap: 10px;
 		transition: all 0.3s ease;
-		box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+		box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
 	}
-	
-	.btn-back:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    
+    /* Nút phụ (Back) */
+    .btn-secondary-action {
+        background: #2d3748;
+        color: white;
+        border-radius: 50px;
+        padding: 12px 30px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+	.btn-action:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 8px 20px rgba(255, 87, 34, 0.5);
 		color: white;
 	}
-	
-	.form-control[type="file"] {
-		cursor: pointer;
-	}
-	
-	.form-control[type="file"]::-webkit-file-upload-button {
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		color: white;
-		border: none;
+    
+    .btn-secondary-action:hover {
+        background: #4a5568;
+        color: white;
+        transform: translateY(-3px);
+    }
+    
+    /* Badges */
+	.badge {
 		padding: 8px 16px;
-		border-radius: 8px;
-		cursor: pointer;
-		margin-right: 10px;
+		border-radius: 20px;
 		font-weight: 600;
+        letter-spacing: 0.5px;
 	}
 	
-	.form-control[type="file"]::-webkit-file-upload-button:hover {
-		opacity: 0.9;
+	.badge.bg-danger {
+		background: linear-gradient(135deg, #ef4444 0%, #c62828 100%) !important;
 	}
+	
+	.badge.bg-success {
+		background: linear-gradient(135deg, #00c853 0%, #2e7d32 100%) !important;
+	}
+    
+    /* Alert styling */
+    .alert-custom {
+        background: rgba(17, 22, 33, 0.9);
+        border: 1px solid;
+        backdrop-filter: blur(10px);
+    }
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+    
 	<div class="profile-container">
 		<div class="profile-header">
 			<div class="profile-avatar">
 				<c:choose>
-					<c:when test="${user.fullname != null && !empty user.fullname}">
-						${user.fullname.substring(0, 1).toUpperCase()}
+					<c:when test="${user.images != null && !empty user.images}">
+                        <c:choose>
+                            <c:when test="${user.images.startsWith('http')}">
+                                <img src="${user.images}" alt="Avatar">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="<c:url value='/images/${user.images}' />" alt="Avatar">
+                            </c:otherwise>
+                        </c:choose>
 					</c:when>
 					<c:otherwise>
-						${user.username.substring(0, 1).toUpperCase()}
+                        ${user.fullname != null ? user.fullname.substring(0, 1).toUpperCase() : user.username.substring(0, 1).toUpperCase()}
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -233,133 +298,100 @@
 				${user.fullname != null ? user.fullname : user.username}
 			</h1>
 			<div class="profile-username">
-				<i class="fas fa-user"></i> @${user.username}
+				<i class="fas fa-at text-warning"></i> ${user.username}
 			</div>
 			<c:if test="${user.admin}">
 				<span class="profile-badge">
-					<i class="fas fa-crown"></i> Quản Trị Viên
+					<i class="fas fa-crown text-warning"></i> Quản Trị Viên
 				</span>
 			</c:if>
 		</div>
 		
-		<!-- Hiển thị thông báo -->
 		<c:if test="${message != null}">
-			<div class="alert alert-success alert-dismissible fade show" role="alert" style="background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981; border-radius: 12px; margin-bottom: 20px;">
-				<i class="fas fa-check-circle"></i> ${message}
+			<div class="alert alert-custom alert-dismissible fade show mb-4" role="alert" style="border-color: #00c853; color: #69f0ae;">
+				<i class="fas fa-check-circle me-2"></i> ${message}
 				<button type="button" class="btn-close" data-bs-dismiss="alert" style="filter: brightness(0) invert(1);"></button>
 			</div>
 		</c:if>
 		
 		<c:if test="${error != null}">
-			<div class="alert alert-danger alert-dismissible fade show" role="alert" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; border-radius: 12px; margin-bottom: 20px;">
-				<i class="fas fa-exclamation-circle"></i> ${error}
+			<div class="alert alert-custom alert-dismissible fade show mb-4" role="alert" style="border-color: #ff5252; color: #ff8a80;">
+				<i class="fas fa-exclamation-circle me-2"></i> ${error}
 				<button type="button" class="btn-close" data-bs-dismiss="alert" style="filter: brightness(0) invert(1);"></button>
 			</div>
 		</c:if>
 		
 		<div class="profile-card">
-			<h3><i class="fas fa-edit"></i> Chỉnh Sửa Thông Tin Cá Nhân</h3>
+			<h3><i class="fas fa-user-edit"></i> Chỉnh Sửa Thông Tin</h3>
 			<form action="<c:url value='/profile/update' />" method="POST" enctype="multipart/form-data">
 				<input type="hidden" name="username" value="${user.username}">
 				<input type="hidden" name="isEdit" value="true">
 				
 				<div class="info-row">
 					<div class="info-label">
-						<i class="fas fa-user"></i> Username:
+						<i class="fas fa-user"></i> Username
 					</div>
 					<div class="info-value">
-						<input type="text" class="form-control" value="${user.username}" readonly style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7);">
-						<small class="text-muted" style="color: rgba(255,255,255,0.5);">Username không thể thay đổi</small>
+						<input type="text" class="form-control" value="${user.username}" readonly style="opacity: 0.7; cursor: not-allowed;">
 					</div>
 				</div>
 				
 				<div class="info-row">
 					<div class="info-label">
-						<i class="fas fa-id-card"></i> Họ Tên:
+						<i class="fas fa-id-card"></i> Họ Tên
 					</div>
 					<div class="info-value">
-						<input type="text" class="form-control" name="fullname" value="${user.fullname != null ? user.fullname : ''}" 
-							placeholder="Nhập họ tên" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
+						<input type="text" class="form-control" name="fullname" value="${user.fullname != null ? user.fullname : ''}" placeholder="Nhập họ tên đầy đủ">
 					</div>
 				</div>
 				
 				<div class="info-row">
 					<div class="info-label">
-						<i class="fas fa-envelope"></i> Email:
+						<i class="fas fa-envelope"></i> Email
 					</div>
 					<div class="info-value">
-						<input type="email" class="form-control" name="email" value="${user.email != null ? user.email : ''}" 
-							placeholder="Nhập email" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
+						<input type="email" class="form-control" name="email" value="${user.email != null ? user.email : ''}" placeholder="example@email.com">
 					</div>
 				</div>
 				
 				<div class="info-row">
 					<div class="info-label">
-						<i class="fas fa-phone"></i> Điện Thoại:
+						<i class="fas fa-phone"></i> Điện Thoại
 					</div>
 					<div class="info-value">
-						<input type="text" class="form-control" name="phone" value="${user.phone != null ? user.phone : ''}" 
-							placeholder="Nhập số điện thoại" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
+						<input type="text" class="form-control" name="phone" value="${user.phone != null ? user.phone : ''}" placeholder="Nhập số điện thoại">
 					</div>
 				</div>
 				
 				<div class="info-row">
 					<div class="info-label">
-						<i class="fas fa-image"></i> Ảnh Đại Diện:
+						<i class="fas fa-camera"></i> Avatar
 					</div>
 					<div class="info-value">
-						<c:if test="${user.images != null && !empty user.images}">
-							<div class="mb-2">
-								<c:choose>
-									<c:when test="${user.images.startsWith('http')}">
-										<img src="${user.images}" 
-											alt="Avatar" 
-											style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(102, 126, 234, 0.5);">
-									</c:when>
-									<c:otherwise>
-										<img src="<c:url value='/images/${user.images}' />" 
-											alt="Avatar" 
-											style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(102, 126, 234, 0.5);">
-									</c:otherwise>
-								</c:choose>
-							</div>
-						</c:if>
 						<div class="mb-2">
-							<label for="avatarFile" class="form-label" style="color: rgba(255,255,255,0.8);">
-								<i class="fas fa-upload"></i> Tải ảnh đại diện mới:
-							</label>
-							<input type="file" class="form-control" id="avatarFile" name="avatarFile" 
-								accept="image/*" 
-								style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
-							<small class="text-muted" style="color: rgba(255,255,255,0.5);">
-								Chấp nhận: JPG, PNG, GIF (tối đa 10MB)
-							</small>
+							<input type="file" class="form-control" id="avatarFile" name="avatarFile" accept="image/*">
+							<div class="form-text text-white-50 mt-1">Hỗ trợ: JPG, PNG, GIF (Max 10MB)</div>
 						</div>
-						<div class="mb-2">
-							<label for="images" class="form-label" style="color: rgba(255,255,255,0.8);">
-								Hoặc nhập URL hình ảnh:
-							</label>
+						<div class="mt-3">
+							<label for="images" class="form-label text-white-50" style="font-size: 0.9rem;">Hoặc dùng URL ảnh:</label>
 							<input type="text" class="form-control" id="images" name="images" 
 								value="${user.images != null && user.images.startsWith('http') ? user.images : ''}" 
-								placeholder="https://example.com/image.jpg" 
-								style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
+								placeholder="https://...">
 						</div>
 					</div>
 				</div>
 				
 				<div class="info-row">
 					<div class="info-label">
-						<i class="fas fa-lock"></i> Mật Khẩu Mới:
+						<i class="fas fa-lock"></i> Mật Khẩu
 					</div>
 					<div class="info-value">
-						<input type="password" class="form-control" name="password" 
-							placeholder="Để trống nếu không đổi mật khẩu" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
-						<small class="text-muted" style="color: rgba(255,255,255,0.5);">Để trống nếu không muốn thay đổi mật khẩu</small>
+						<input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu mới (nếu muốn đổi)">
 					</div>
 				</div>
 				
-				<div class="text-center mt-4">
-					<button type="submit" class="btn-back">
+				<div class="text-center mt-5">
+					<button type="submit" class="btn-action">
 						<i class="fas fa-save"></i> Lưu Thay Đổi
 					</button>
 				</div>
@@ -367,48 +399,48 @@
 		</div>
 		
 		<div class="profile-card">
-			<h3><i class="fas fa-shield-alt"></i> Quyền Hạn & Trạng Thái</h3>
+			<h3><i class="fas fa-shield-alt"></i> Trạng Thái Tài Khoản</h3>
 			<div class="info-row">
 				<div class="info-label">
-					<i class="fas fa-user-shield"></i> Quyền:
+					<i class="fas fa-user-tag"></i> Vai Trò
 				</div>
 				<div class="info-value">
 					<c:if test="${user.admin}">
-						<span class="badge bg-danger">Admin</span>
+						<span class="badge bg-danger">ADMINISTRATOR</span>
 					</c:if>
 					<c:if test="${!user.admin}">
-						<span class="badge bg-secondary">User</span>
+						<span class="badge bg-secondary">MEMBER</span>
 					</c:if>
 				</div>
 			</div>
 			<div class="info-row">
 				<div class="info-label">
-					<i class="fas fa-toggle-on"></i> Trạng Thái:
+					<i class="fas fa-signal"></i> Tình Trạng
 				</div>
 				<div class="info-value">
 					<c:if test="${user.active}">
-						<span class="badge bg-success">Hoạt động</span>
+						<span class="badge bg-success">ĐANG HOẠT ĐỘNG</span>
 					</c:if>
 					<c:if test="${!user.active}">
-						<span class="badge bg-danger">Không hoạt động</span>
+						<span class="badge bg-danger">BỊ KHÓA</span>
 					</c:if>
 				</div>
 			</div>
 		</div>
 		
-		<div class="text-center mt-4">
-			<a href="<c:url value='/home' />" class="btn-back">
+		<div class="text-center mt-4 mb-5">
+			<a href="<c:url value='/home' />" class="btn-secondary-action me-3">
 				<i class="fas fa-arrow-left"></i> Về Trang Chủ
 			</a>
 			<c:if test="${isAdmin}">
-				<a href="<c:url value='/admin/users' />" class="btn-back ms-3">
-					<i class="fas fa-cog"></i> Vào Trang Quản Trị
+				<a href="<c:url value='/admin/users' />" class="btn-secondary-action">
+					<i class="fas fa-cogs"></i> Trang Quản Trị
 				</a>
 			</c:if>
 		</div>
 	</div>
+    
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
